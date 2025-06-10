@@ -17,3 +17,6 @@ Construir uma aplicação real, focada em resolver um problema comum de quem est
 
 ## Status
 Em desenvolvimento – MVP em andamento
+
+## Tecnologias e ferramentas adicionais 
+- Google Checkstyle para Java
