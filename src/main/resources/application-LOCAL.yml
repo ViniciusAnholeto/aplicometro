@@ -1,2 +1,15 @@
 configs:
   environment: LOCAL
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/aplicometro
+    username: postgres
+    password: postgres
+
+
+logging:
+  level:
+    root: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql: TRACE

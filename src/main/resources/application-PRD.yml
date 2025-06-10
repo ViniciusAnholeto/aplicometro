@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://prd-db-host:5432/aplicometro
+    username: aplicometro
+    password: ${DB_PASSWORD}
+
+logging:
+  level:
+    root: INFO
+
+server:
+  port: 8080
