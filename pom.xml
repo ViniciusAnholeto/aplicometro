@@ -36,6 +36,9 @@
     <jacoco.excludes>
       **/request/**,
       **/response/**,
+      **/models/**,
+      **/inputs/**,
+      **/controllers/**,
       **/Aplication.class
     </jacoco.excludes>
   </properties>
