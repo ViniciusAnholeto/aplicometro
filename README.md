@@ -1,6 +1,6 @@
 # 🧭 Aplicômetro
 
-<p align="center">
+<p>
   <!-- Status do build no GitHub Actions -->
   <a href="https://github.com/ViniciusAnholeto/aplicometro/actions/workflows/ci.yml">
     <img src="https://github.com/ViniciusAnholeto/aplicometro/actions/workflows/ci.yml/badge.svg" alt="Build Status">
