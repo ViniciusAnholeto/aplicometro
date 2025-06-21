@@ -1,14 +1,6 @@
 # 🧭 Aplicômetro
 
 <p>
-  <!-- Status do build no GitHub Actions -->
-  <a href="https://github.com/ViniciusAnholeto/aplicometro/actions/workflows/ci.yml">
-    <img src="https://github.com/ViniciusAnholeto/aplicometro/actions/workflows/ci.yml/badge.svg" alt="Build Status">
-  </a>
-
-  <!-- Cobertura de testes -->
-  ![Coverage](https://raw.githubusercontent.com/ViniciusAnholeto/aplicometro/main/.github/badges/coverage.svg)
-
   <!-- Linguagem principal -->
   <img src="https://img.shields.io/github/languages/top/ViniciusAnholeto/aplicometro" alt="Main language">
 
