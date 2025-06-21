@@ -1,24 +1,75 @@
-![Build](https://github.com/ViniciusAnholeto/aplicometro/actions/workflows/deploy.yml/badge.svg)
+# 🧭 Aplicômetro
 
-# Aplicômetro
+<p align="center">
+  <!-- Status do build no GitHub Actions -->
+  <a href="https://github.com/ViniciusAnholeto/aplicometro/actions/workflows/ci.yml">
+    <img src="https://github.com/ViniciusAnholeto/aplicometro/actions/workflows/ci.yml/badge.svg" alt="Build Status">
+  </a>
 
-Sistema para ajudar pessoas desenvolvedoras a organizarem suas candidaturas em processos seletivos de forma simples e eficiente
+  <!-- Cobertura de testes (valor estático, pode atualizar depois com ferramenta real) -->
+  ![Coverage](https://raw.githubusercontent.com/ViniciusAnholeto/aplicometro/main/.github/badges/coverage.svg)
 
-## Tecnologias
-- Backend: Java 21, Spring Boot 3
-- Frontend: Angular 17
-- Banco de dados: PostgreSQL
+  <!-- Linguagem principal -->
+  <img src="https://img.shields.io/github/languages/top/ViniciusAnholeto/aplicometro" alt="Main language">
 
-## Objetivo
-Construir uma aplicação real, focada em resolver um problema comum de quem está buscando recolocação profissional
+  <!-- Último commit -->
+  <img src="https://img.shields.io/github/last-commit/ViniciusAnholeto/aplicometro" alt="Last commit">
+</p>
 
-## Estrutura esperada
-- Backend (API REST com Spring Boot)
-- Frontend (SPA com Angular)
-- Integração entre módulos via HTTP
+O **Aplicômetro** é um sistema pessoal (e público) para organizar candidaturas a vagas de emprego.
 
-## Status
-Em desenvolvimento – MVP em andamento
+Ele nasceu de uma dor real de quem está buscando uma recolocação no mercado: o caos que é tentar acompanhar dezenas de processos seletivos, estágios de entrevistas, mensagens de recrutadores e status indefinidos. O Aplicômetro vem para resolver isso de forma simples, prática e eficiente.
 
-## Tecnologias e ferramentas adicionais 
-- Google Checkstyle para Java
+Quem sabe isso não vira um produto? 
+
+Ou uma extensão pra navegador?
+
+---
+
+## ✨ Funcionalidades do MVP
+
+- Cadastro manual de candidaturas
+- Registro de candidaturas por:
+    - Aplicação direta (LinkedIn, e-mail, plataforma)
+    - Contato de recrutador
+- Atualização de status da candidatura
+- Comentários e observações por etapa
+- Visualização de histórico de aplicações
+
+---
+
+## 🚀 Tecnologias Utilizadas
+
+### Backend
+- Java 21
+- Spring Boot 3.5
+- Maven
+- PostgreSQL
+- Docker & Docker Compose
+- GitHub Actions (CI/CD)
+- JaCoCo (cobertura de testes)
+
+### Frontend
+- Angular (em fase de aprendizado)
+
+---
+
+## 🧪 Qualidade e CI/CD
+
+Este projeto utiliza:
+- **Cobertura mínima de testes** validada com **JaCoCo**
+- **Build automatizado com GitHub Actions**
+- Deploy automático via Docker
+
+---
+
+## 📦 Como rodar localmente
+
+### Pré-requisitos
+- Java 21
+- Docker e Docker Compose
+
+### Subindo o ambiente
+
+```bash
+docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
