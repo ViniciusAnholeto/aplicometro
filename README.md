@@ -1,3 +1,5 @@
+![Build](https://github.com/ViniciusAnholeto/aplicometro/actions/workflows/deploy.yml/badge.svg)
+
 # Aplicômetro
 
 Sistema para ajudar pessoas desenvolvedoras a organizarem suas candidaturas em processos seletivos de forma simples e eficiente
