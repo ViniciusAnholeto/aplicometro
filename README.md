@@ -6,7 +6,7 @@
     <img src="https://github.com/ViniciusAnholeto/aplicometro/actions/workflows/ci.yml/badge.svg" alt="Build Status">
   </a>
 
-  <!-- Cobertura de testes (valor estático, pode atualizar depois com ferramenta real) -->
+  <!-- Cobertura de testes -->
   ![Coverage](https://raw.githubusercontent.com/ViniciusAnholeto/aplicometro/main/.github/badges/coverage.svg)
 
   <!-- Linguagem principal -->

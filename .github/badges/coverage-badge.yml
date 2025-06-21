@@ -2,7 +2,7 @@ name: Coverage Badge
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
 
 jobs:
@@ -37,13 +37,15 @@ jobs:
 
           echo "<svg xmlns='http://www.w3.org/2000/svg' width='130' height='20'>
             <linearGradient id='b' x2='0' y2='100%%'>
-              <stop offset='0' stop-color='#bbb' stop-opacity='.1'/>
-              <stop offset='1' stop-opacity='.1'/>
+            <stop offset='0' stop-color='#bbb' stop-opacity='.1'/>
+            <stop offset='1' stop-opacity='.1'/>
             </linearGradient>
             <rect rx='3' width='130' height='20' fill='#555'/>
             <rect rx='3' x='80' width='50' height='20' fill='$COLOR'/>
             <path fill='$COLOR' d='M80 0h4v20h-4z'/>
             <rect rx='3' width='130' height='20' fill='url(#b)'/>
             <g fill='#fff' text-anchor='middle' font-family='Verdana' font-size='11'>
-              <text x='40' y='15'>coverage</text>
-              <text x='105' y='15'>$
+            <text x='40' y='15'>coverage</text>
+            <text x='105' y='15'>${PERCENT}%</text>
+            </g>
+          </svg>" > .github/badges/coverage.svg
