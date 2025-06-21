@@ -45,3 +45,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     if: success()
+
+    steps:
+      - name: Deploy to Render
+        run: echo "🚀 Aqui você pode colocar lógica de deploy (Webhook, CLI etc)"
