@@ -23,10 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/users")
 public class UserController implements UserDoc {
 
-  private final CreateUser createUser;
-  private final ModifyUser modifyUser;
-  private final FindUser findUser;
-  private final DeleteUser deleteUser;
+  private CreateUser createUser;
+  private ModifyUser modifyUser;
+  private FindUser findUser;
+  private DeleteUser deleteUser;
 
   @Override
   @PostMapping("/create")
