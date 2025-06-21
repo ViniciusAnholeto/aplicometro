@@ -1,5 +1,9 @@
 package com.viniciusanholeto.aplicometro.infrastructure.api.v1.controllers;
 
+import com.viniciusanholeto.aplicometro.domains.users.resources.CreateUser;
+import com.viniciusanholeto.aplicometro.domains.users.resources.DeleteUser;
+import com.viniciusanholeto.aplicometro.domains.users.resources.FindUser;
+import com.viniciusanholeto.aplicometro.domains.users.resources.ModifyUser;
 import com.viniciusanholeto.aplicometro.infrastructure.api.v1.request.users.CreateUserRequest;
 import com.viniciusanholeto.aplicometro.infrastructure.api.v1.request.users.ModifyUserRequest;
 import com.viniciusanholeto.aplicometro.infrastructure.api.v1.response.users.UserResponse;
@@ -19,10 +23,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/users")
 public class UserController implements UserDoc {
 
+  private final CreateUser createUser;
+  private final ModifyUser modifyUser;
+  private final FindUser findUser;
+  private final DeleteUser deleteUser;
+
   @Override
   @PostMapping("/create")
   public UserResponse createUser(CreateUserRequest request) {
-    return null;
+    log.info("Creating user with request: {}", request);
+    return new UserResponse(createUser.execute(request.toInput()));
   }
 
   @Override
@@ -31,18 +41,20 @@ public class UserController implements UserDoc {
       @PathVariable Long id,
       @RequestBody ModifyUserRequest user
   ) {
-    return null;
+    return new UserResponse(modifyUser.execute(id, user.toInput()));
   }
 
   @Override
   @GetMapping("/{id}")
   public UserResponse findUserById(Long id) {
-    return null;
+    log.info("Finding user by id: {}", id);
+    return new UserResponse(findUser.execute(id));
   }
 
   @Override
   @GetMapping("/delete/{id}")
   public void deleteUserById(Long id) {
-
+    log.info("Deleting user by id: {}", id);
+    deleteUser.execute(id);
   }
 }
