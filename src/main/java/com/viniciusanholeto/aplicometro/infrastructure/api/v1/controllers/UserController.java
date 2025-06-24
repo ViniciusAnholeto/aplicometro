@@ -1,5 +1,12 @@
 package com.viniciusanholeto.aplicometro.infrastructure.api.v1.controllers;
 
+import com.viniciusanholeto.aplicometro.domains.users.resources.CreateUser;
+import com.viniciusanholeto.aplicometro.domains.users.resources.DeleteUser;
+import com.viniciusanholeto.aplicometro.domains.users.resources.FindUser;
+import com.viniciusanholeto.aplicometro.domains.users.resources.ModifyUser;
+import com.viniciusanholeto.aplicometro.infrastructure.api.v1.request.users.CreateUserRequest;
+import com.viniciusanholeto.aplicometro.infrastructure.api.v1.request.users.ModifyUserRequest;
+import com.viniciusanholeto.aplicometro.infrastructure.api.v1.response.users.UserResponse;
 import com.viniciusanholeto.aplicometro.infrastructure.api.v1.swagger.UserDoc;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,25 +36,25 @@ public class UserController implements UserDoc {
   }
 
   @Override
-  @PostMapping("/modify/{id}")
+  @PostMapping("/modify/{email}")
   public UserResponse modifyUser(
-      @PathVariable Long id,
+      @PathVariable String email,
       @RequestBody ModifyUserRequest user
   ) {
-    return new UserResponse(modifyUser.execute(id, user.toInput()));
+    return new UserResponse(modifyUser.execute(email, user.toInput()));
   }
 
   @Override
-  @GetMapping("/{id}")
-  public UserResponse findUserById(Long id) {
-    log.info("Finding user by id: {}", id);
-    return new UserResponse(findUser.execute(id));
+  @GetMapping("/{email}")
+  public UserResponse findUserByEmail(String email) {
+    log.info("Finding user by email: {}", email);
+    return new UserResponse(findUser.execute(email));
   }
 
   @Override
-  @GetMapping("/delete/{id}")
-  public void deleteUserById(Long id) {
-    log.info("Deleting user by id: {}", id);
-    deleteUser.execute(id);
+  @GetMapping("/delete/{email}")
+  public void deleteUserByEmail(String email) {
+    log.info("Deleting user by email: {}", email);
+    deleteUser.execute(email);
   }
 }

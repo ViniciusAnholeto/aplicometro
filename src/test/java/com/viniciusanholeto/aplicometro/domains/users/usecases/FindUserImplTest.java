@@ -17,10 +17,9 @@ class FindUserImplTest {
 
   @Test
   void executeReturnsUserModelWhenIdIsValid() {
-    UserModel result = findUser.execute(1L);
+    UserModel result = findUser.execute("user@aplicometro.com");
 
     assertNotNull(result);
-    assertNull(result.getId());
     assertNull(result.getName());
   }
 
@@ -29,7 +28,6 @@ class FindUserImplTest {
     UserModel result = findUser.execute(null);
 
     assertNotNull(result);
-    assertNull(result.getId());
     assertNull(result.getName());
   }
 

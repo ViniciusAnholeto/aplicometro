@@ -19,7 +19,7 @@ class ModifyUserImplTest {
   void executeReturnsUserModelWhenIdAndRequestAreValid() {
     ModifyUserInput input = ModifyUserInput.builder().build();
 
-    UserModel result = modifyUser.execute(1L, input);
+    UserModel result = modifyUser.execute("user@aplicometro.com", input);
 
     assertNotNull(result);
   }

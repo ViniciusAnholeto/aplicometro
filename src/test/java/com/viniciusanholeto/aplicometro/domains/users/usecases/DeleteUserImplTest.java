@@ -15,6 +15,6 @@ class DeleteUserImplTest {
 
   @Test
   void executeDoesNotThrowExceptionWhenUserIdIsValid() {
-    assertDoesNotThrow(() -> deleteUser.execute(1L));
+    assertDoesNotThrow(() -> deleteUser.execute("user@aplicometro.com"));
   }
 }
