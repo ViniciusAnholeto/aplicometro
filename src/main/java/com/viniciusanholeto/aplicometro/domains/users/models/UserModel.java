@@ -1,5 +1,6 @@
 package com.viniciusanholeto.aplicometro.domains.users.models;
 
+import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,6 +14,6 @@ public class UserModel {
   private String password;
   private String role;
   private boolean active;
-  private String createdAt;
-  private String updatedAt;
+  private LocalDateTime createdAt;
+  private LocalDateTime updatedAt;
 }

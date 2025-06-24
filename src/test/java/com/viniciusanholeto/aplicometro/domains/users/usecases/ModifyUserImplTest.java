@@ -5,12 +5,18 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import com.viniciusanholeto.aplicometro.domains.users.inputs.ModifyUserInput;
 import com.viniciusanholeto.aplicometro.domains.users.models.UserModel;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-public class ModifyUserImplTest {
+@ExtendWith(MockitoExtension.class)
+class ModifyUserImplTest {
+
+  @InjectMocks
+  private ModifyUserImpl modifyUser;
 
   @Test
   void executeReturnsUserModelWhenIdAndRequestAreValid() {
-    ModifyUserImpl modifyUser = new ModifyUserImpl();
     ModifyUserInput input = ModifyUserInput.builder().build();
 
     UserModel result = modifyUser.execute(1L, input);

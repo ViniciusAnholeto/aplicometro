@@ -5,13 +5,18 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.viniciusanholeto.aplicometro.domains.users.models.UserModel;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-public class FindUserImplTest {
+@ExtendWith(MockitoExtension.class)
+class FindUserImplTest {
+
+  @InjectMocks
+  private FindUserImpl findUser;
 
   @Test
   void executeReturnsUserModelWhenIdIsValid() {
-    FindUserImpl findUser = new FindUserImpl();
-
     UserModel result = findUser.execute(1L);
 
     assertNotNull(result);
@@ -21,8 +26,6 @@ public class FindUserImplTest {
 
   @Test
   void executeReturnsEmptyUserModelWhenIdIsNull() {
-    FindUserImpl findUser = new FindUserImpl();
-
     UserModel result = findUser.execute(null);
 
     assertNotNull(result);

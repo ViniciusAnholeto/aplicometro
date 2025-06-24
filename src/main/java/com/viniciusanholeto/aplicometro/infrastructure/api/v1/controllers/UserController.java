@@ -1,12 +1,5 @@
 package com.viniciusanholeto.aplicometro.infrastructure.api.v1.controllers;
 
-import com.viniciusanholeto.aplicometro.domains.users.resources.CreateUser;
-import com.viniciusanholeto.aplicometro.domains.users.resources.DeleteUser;
-import com.viniciusanholeto.aplicometro.domains.users.resources.FindUser;
-import com.viniciusanholeto.aplicometro.domains.users.resources.ModifyUser;
-import com.viniciusanholeto.aplicometro.infrastructure.api.v1.request.users.CreateUserRequest;
-import com.viniciusanholeto.aplicometro.infrastructure.api.v1.request.users.ModifyUserRequest;
-import com.viniciusanholeto.aplicometro.infrastructure.api.v1.response.users.UserResponse;
 import com.viniciusanholeto.aplicometro.infrastructure.api.v1.swagger.UserDoc;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,10 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/users")
 public class UserController implements UserDoc {
 
-  private CreateUser createUser;
-  private ModifyUser modifyUser;
-  private FindUser findUser;
-  private DeleteUser deleteUser;
+  private final CreateUser createUser;
+  private final ModifyUser modifyUser;
+  private final FindUser findUser;
+  private final DeleteUser deleteUser;
 
   @Override
   @PostMapping("/create")
