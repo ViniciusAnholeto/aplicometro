@@ -10,7 +10,14 @@ public interface UserDatabasePort {
    * @param userId the ID of the user to find
    * @return an Optional containing the UserModel if found, or empty if not found
    */
-  Optional<UserModel> findUserById(Long userId);
+  Optional<UserModel> findUserById(String userId);
+
+  /**
+   * Finds a user by their email.
+   * @param email the email of the user to find
+   * @return an Optional containing the UserModel if found, or empty if not found
+   */
+  Optional<UserModel> findUserByEmail(String email);
 
   /**
    * Saves a user to the database.
@@ -23,5 +30,5 @@ public interface UserDatabasePort {
    * Deletes a user by their ID.
    * @param userId the ID of the user to delete
    */
-  void deleteUser(Long userId);
+  void deleteUser(String userId);
 }
