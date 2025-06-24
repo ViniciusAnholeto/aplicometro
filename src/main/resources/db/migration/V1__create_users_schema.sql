@@ -1,7 +1,7 @@
--- Criar extensão para UUID
+-- Create extension for UUID
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
--- Tabela de usuários
+-- Users table creation script
 CREATE TABLE users (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name VARCHAR(100) NOT NULL,
@@ -12,14 +12,14 @@ CREATE TABLE users (
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabela de roles
+-- Roles table creation script
 CREATE TABLE roles (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name VARCHAR(50) NOT NULL UNIQUE,
     description TEXT
 );
 
--- Tabela de user_roles
+-- User roles association table
 CREATE TABLE user_roles (
     user_id UUID NOT NULL,
     role_id UUID NOT NULL,

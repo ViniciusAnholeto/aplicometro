@@ -1,7 +1,9 @@
 package com.viniciusanholeto.aplicometro.domains.users.usecases;
 
 import com.viniciusanholeto.aplicometro.domains.users.resources.DeleteUser;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DeleteUserImpl implements DeleteUser {
 
   @Override
