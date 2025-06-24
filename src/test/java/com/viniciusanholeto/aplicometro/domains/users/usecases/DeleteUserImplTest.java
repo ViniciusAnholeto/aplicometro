@@ -3,13 +3,19 @@ package com.viniciusanholeto.aplicometro.domains.users.usecases;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-public class DeleteUserImplTest {
+@ExtendWith(MockitoExtension.class)
+class DeleteUserImplTest {
+
+  @InjectMocks
+  private DeleteUserImpl deleteUser;
 
   @Test
   void executeDoesNotThrowExceptionWhenUserIdIsValid() {
-    DeleteUserImpl deleteUser = new DeleteUserImpl();
-
     assertDoesNotThrow(() -> deleteUser.execute(1L));
   }
 }
