@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 
 import com.viniciusanholeto.aplicometro.domains.users.fixtures.UserModelFixture;
 import com.viniciusanholeto.aplicometro.domains.users.models.UserModel;
+import com.viniciusanholeto.aplicometro.infrastructure.database.entities.UserEntity;
 import com.viniciusanholeto.aplicometro.infrastructure.database.repositories.UserRepository;
 import java.util.Optional;
 import java.util.UUID;
@@ -51,5 +52,31 @@ class UserDatabaseAdapterTest {
   void deleteUserThrowsExceptionWhenIdIsInvalid() {
     String userId = "invalid-uuid";
     assertThrows(IllegalArgumentException.class, () -> adapter.deleteUser(userId));
+  }
+
+  @Test
+  void findUserByEmailReturnsEmptyWhenEmailDoesNotExist() {
+    String email = "nonexistent@example.com";
+    when(repository.findByEmail(email)).thenReturn(Optional.empty());
+
+    Optional<UserModel> result = adapter.findUserByEmail(email);
+
+    assertTrue(result.isEmpty());
+  }
+
+  @Test
+  void saveUserReturnsSavedUserModelWhenUserIsValid() {
+    String userId = UUID.randomUUID().toString();
+    UserModel user = createUserModel(userId);
+    UserEntity entity = new UserEntity(user);
+    when(repository.save(entity)).thenReturn(entity);
+
+    Optional<UserModel> result = adapter.saveUser(user);
+
+    assertTrue(result.isPresent());
+  }
+
+  private UserModel createUserModel(String id) {
+    return UserModelFixture.create(id);
   }
 }

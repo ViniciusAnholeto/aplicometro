@@ -38,7 +38,9 @@
       **/response/**,
       **/models/**,
       **/inputs/**,
+      **/entities/**,
       **/controllers/**,
+      **/swagger/**,
       **/Aplication.class
     </jacoco.excludes>
   </properties>

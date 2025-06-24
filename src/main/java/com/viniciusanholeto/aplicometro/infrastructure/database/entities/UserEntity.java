@@ -9,7 +9,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.UUID;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "users")
 public class UserEntity {
@@ -32,13 +34,13 @@ public class UserEntity {
     this.name = userModel.getName();
     this.email = userModel.getEmail();
     this.password = userModel.getPassword();
-    this.createdAt = LocalDateTime.now();
-    this.updatedAt = LocalDateTime.now();
+    this.createdAt = userModel.getCreatedAt();
+    this.updatedAt = userModel.getUpdatedAt();
   }
 
   public UserModel toModel() {
     return UserModel.builder()
-        .id(this.id.toString())
+        .id(this.id != null ? this.id.toString() : null)
         .name(this.name)
         .email(this.email)
         .password(this.password)
