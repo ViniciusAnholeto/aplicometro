@@ -5,11 +5,10 @@ import com.viniciusanholeto.aplicometro.domains.users.models.UserModel;
 public interface FindUser {
 
   /**
-   * Finds a user by their ID.
+   * Finds a user by their email address. If the user is not found, an exception will be thrown.
    *
-   * @param id the ID of the user to find
+   * @param email the ID of the user to find
    * @return the found user
    */
-  UserModel execute(Long id);
-
+  UserModel execute(String email);
 }

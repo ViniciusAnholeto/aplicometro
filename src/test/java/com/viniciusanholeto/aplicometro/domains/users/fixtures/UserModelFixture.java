@@ -9,7 +9,6 @@ import lombok.Data;
 @Builder
 public class UserModelFixture {
 
-  private String id;
   private String name;
   private String email;
   private String password;
@@ -20,19 +19,6 @@ public class UserModelFixture {
 
   public static UserModel create() {
     return UserModel.builder()
-        .name("Test User")
-        .email("user@aplicometro.com")
-        .password("password")
-        .role("USER")
-        .active(true)
-        .createdAt(LocalDateTime.now())
-        .updatedAt(LocalDateTime.now())
-        .build();
-  }
-
-  public static UserModel create(String id) {
-    return UserModel.builder()
-        .id(id)
         .name("Test User")
         .email("user@aplicometro.com")
         .password("password")

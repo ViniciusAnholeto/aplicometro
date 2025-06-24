@@ -1,6 +1,5 @@
 package com.viniciusanholeto.aplicometro.infrastructure.database.adapters;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
@@ -12,7 +11,6 @@ import com.viniciusanholeto.aplicometro.domains.users.models.UserModel;
 import com.viniciusanholeto.aplicometro.infrastructure.database.entities.UserEntity;
 import com.viniciusanholeto.aplicometro.infrastructure.database.repositories.UserRepository;
 import java.util.Optional;
-import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -29,29 +27,13 @@ class UserDatabaseAdapterTest {
   private UserDatabaseAdapter adapter;
 
   @Test
-  void findUserByIdReturnsEmptyWhenIdIsInvalid() {
-    String userId = UUID.randomUUID().toString();
-    when(repository.findById(UUID.fromString(userId))).thenReturn(Optional.empty());
+  void deleteUserDoesNotThrowExceptionWhenEmailIsValid() {
+    String email = "valid@email.com";
+    doNothing().when(repository).deleteByEmail(email);
 
-    Optional<UserModel> result = adapter.findUserById(userId);
+    adapter.deleteUser(email);
 
-    assertTrue(result.isEmpty());
-  }
-
-  @Test
-  void deleteUserDoesNotThrowExceptionWhenIdIsValid() {
-    String userId = UUID.randomUUID().toString();
-    doNothing().when(repository).deleteById(UUID.fromString(userId));
-
-    adapter.deleteUser(userId);
-
-    verify(repository, times(1)).deleteById(UUID.fromString(userId));
-  }
-
-  @Test
-  void deleteUserThrowsExceptionWhenIdIsInvalid() {
-    String userId = "invalid-uuid";
-    assertThrows(IllegalArgumentException.class, () -> adapter.deleteUser(userId));
+    verify(repository, times(1)).deleteByEmail(email);
   }
 
   @Test
@@ -66,8 +48,7 @@ class UserDatabaseAdapterTest {
 
   @Test
   void saveUserReturnsSavedUserModelWhenUserIsValid() {
-    String userId = UUID.randomUUID().toString();
-    UserModel user = createUserModel(userId);
+    UserModel user = createUserModel();
     UserEntity entity = new UserEntity(user);
     when(repository.save(entity)).thenReturn(entity);
 
@@ -76,7 +57,7 @@ class UserDatabaseAdapterTest {
     assertTrue(result.isPresent());
   }
 
-  private UserModel createUserModel(String id) {
-    return UserModelFixture.create(id);
+  private UserModel createUserModel() {
+    return UserModelFixture.create();
   }
 }

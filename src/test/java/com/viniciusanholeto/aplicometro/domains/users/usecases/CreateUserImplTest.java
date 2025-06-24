@@ -32,7 +32,6 @@ class CreateUserImplTest {
     UserModel result = createUser.execute(CreateUserInput.builder().build());
 
     assertNotNull(result);
-    assertNull(result.getId());
     assertNull(result.getName());
   }
 }

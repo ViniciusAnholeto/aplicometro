@@ -5,7 +5,6 @@ import com.viniciusanholeto.aplicometro.domains.users.ports.UserDatabasePort;
 import com.viniciusanholeto.aplicometro.infrastructure.database.entities.UserEntity;
 import com.viniciusanholeto.aplicometro.infrastructure.database.repositories.UserRepository;
 import java.util.Optional;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
@@ -16,18 +15,6 @@ import org.springframework.stereotype.Repository;
 public class UserDatabaseAdapter implements UserDatabasePort {
 
   private final UserRepository repository;
-
-  @Override
-  public Optional<UserModel> findUserById(String userId) {
-    log.info("Finding user by ID: {}", userId);
-
-    Optional<UserModel> userData = repository.findById(UUID.fromString(userId))
-        .map(UserEntity::toModel);
-
-    log.info("User found by ID: {}", userData);
-
-    return userData;
-  }
 
   @Override
   public Optional<UserModel> findUserByEmail(String email) {
@@ -54,11 +41,11 @@ public class UserDatabaseAdapter implements UserDatabasePort {
   }
 
   @Override
-  public void deleteUser(String userId) {
-    log.info("Deleting user with ID: {}", userId);
+  public void deleteUser(String email) {
+    log.info("Deleting user with email: {}", email);
 
-    repository.deleteById(UUID.fromString(userId));
+    repository.deleteByEmail(email);
 
-    log.info("User with ID {} deleted successfully", userId);
+    log.info("User with email {} deleted successfully", email);
   }
 }
