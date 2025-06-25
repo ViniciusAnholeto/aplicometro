@@ -1,35 +1,10 @@
 services:
+  postgres:
+    ports:
+      - "5432:5432"
+
   aplicometro-api:
-    build:
-      context: .
-    container_name: aplicometro-api
     ports:
       - "8080:8080"
     environment:
       SPRING_PROFILES_ACTIVE: LOCAL
-    depends_on:
-      - postgres
-    networks:
-      - aplicometro-network
-
-  postgres:
-    image: postgres:16
-    container_name: aplicometro-db
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: aplicometro
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-    networks:
-      - aplicometro-network
-
-volumes:
-  postgres-data:
-
-networks:
-  aplicometro-network:
-    driver: bridge

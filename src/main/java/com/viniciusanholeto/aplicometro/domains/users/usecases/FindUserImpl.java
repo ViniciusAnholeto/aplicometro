@@ -1,13 +1,20 @@
 package com.viniciusanholeto.aplicometro.domains.users.usecases;
 
 import com.viniciusanholeto.aplicometro.domains.users.models.UserModel;
+import com.viniciusanholeto.aplicometro.domains.users.ports.UserDatabasePort;
 import com.viniciusanholeto.aplicometro.domains.users.resources.FindUser;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
+@RequiredArgsConstructor
 public class FindUserImpl implements FindUser {
 
-  @Override
-  public UserModel execute(Long id) {
-    return UserModel.builder().build();
-  }
+  private final UserDatabasePort database;
 
+  @Override
+  public UserModel execute(String email) {
+    return database.findUserByEmail(email)
+        .orElseThrow();
+  }
 }

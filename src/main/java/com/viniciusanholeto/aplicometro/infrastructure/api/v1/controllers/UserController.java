@@ -23,10 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/users")
 public class UserController implements UserDoc {
 
-  private CreateUser createUser;
-  private ModifyUser modifyUser;
-  private FindUser findUser;
-  private DeleteUser deleteUser;
+  private final CreateUser createUser;
+  private final ModifyUser modifyUser;
+  private final FindUser findUser;
+  private final DeleteUser deleteUser;
 
   @Override
   @PostMapping("/create")
@@ -36,25 +36,25 @@ public class UserController implements UserDoc {
   }
 
   @Override
-  @PostMapping("/modify/{id}")
+  @PostMapping("/modify/{email}")
   public UserResponse modifyUser(
-      @PathVariable Long id,
+      @PathVariable String email,
       @RequestBody ModifyUserRequest user
   ) {
-    return new UserResponse(modifyUser.execute(id, user.toInput()));
+    return new UserResponse(modifyUser.execute(email, user.toInput()));
   }
 
   @Override
-  @GetMapping("/{id}")
-  public UserResponse findUserById(Long id) {
-    log.info("Finding user by id: {}", id);
-    return new UserResponse(findUser.execute(id));
+  @GetMapping("/{email}")
+  public UserResponse findUserByEmail(String email) {
+    log.info("Finding user by email: {}", email);
+    return new UserResponse(findUser.execute(email));
   }
 
   @Override
-  @GetMapping("/delete/{id}")
-  public void deleteUserById(Long id) {
-    log.info("Deleting user by id: {}", id);
-    deleteUser.execute(id);
+  @GetMapping("/delete/{email}")
+  public void deleteUserByEmail(String email) {
+    log.info("Deleting user by email: {}", email);
+    deleteUser.execute(email);
   }
 }

@@ -3,9 +3,9 @@ configs:
 
 spring:
   datasource:
-    url: jdbc:postgresql://dev-db-host:5432/aplicometro
-    username: aplicometro
-    password: securepassword123
+    url: jdbc:postgresql://${DB_HOST}:5432/aplicometro
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
 
 logging:
   level:

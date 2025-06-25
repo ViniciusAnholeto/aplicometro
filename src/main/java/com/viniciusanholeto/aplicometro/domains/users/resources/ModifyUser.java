@@ -6,12 +6,13 @@ import com.viniciusanholeto.aplicometro.domains.users.models.UserModel;
 public interface ModifyUser {
 
   /**
-   * Modifies a user with the given ID using the provided input.
+   * Modifies a user with the given email using the provided input.
+   * If the user does not exist, it will throw an exception.
    *
-   * @param id the ID of the user to modify
+   * @param email the email of the user to modify
    * @param input the input containing the new user data
    * @return the modified user
    */
-  UserModel execute(Long id, ModifyUserInput input);
+  UserModel execute(String email, ModifyUserInput input);
 
 }
