@@ -1,5 +1,8 @@
 package com.viniciusanholeto.aplicometro.domains.users.inputs;
 
+import com.viniciusanholeto.aplicometro.domains.users.models.UserModel;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Data;
 
@@ -7,13 +10,29 @@ import lombok.Data;
 @Builder
 public class CreateUserInput {
 
-  private String name;
   private String email;
+  private String name;
+  private LocalDate birthdate;
   private String password;
-  private String phoneNumber;
-  private String address;
-  private String city;
-  private String state;
-  private String country;
-  private String postalCode;
+  private String jobTitle;
+  private String jobLevel;
+  private Boolean jobHunting;
+  private LocalDateTime createdAt;
+  private LocalDateTime updatedAt;
+  private LocalDateTime lastLogin;
+
+  public UserModel toModel() {
+    return UserModel.builder()
+        .email(email)
+        .name(name)
+        .birthdate(birthdate)
+        .accountStatus("active") // Default account status
+        .jobTitle(jobTitle)
+        .jobLevel(jobLevel)
+        .jobHunting(jobHunting != null && jobHunting)
+        .createdAt(createdAt != null ? createdAt : LocalDateTime.now())
+        .updatedAt(updatedAt != null ? updatedAt : LocalDateTime.now())
+        .lastLogin(lastLogin != null ? lastLogin : LocalDateTime.now())
+        .build();
+  }
 }
