@@ -24,4 +24,11 @@ public interface UserDatabasePort {
    * @param email the email of the user to delete
    */
   void deleteUser(String email);
+
+  /**
+   * Saves user credentials, including email, password hash, and salt.
+   * @param email the user's email
+   * @param passwordHash the hashed password of the user
+   */
+  void saveUserCredentials(String email, String passwordHash);
 }
