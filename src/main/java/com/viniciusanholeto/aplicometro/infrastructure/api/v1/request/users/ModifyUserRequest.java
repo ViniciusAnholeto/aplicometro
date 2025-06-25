@@ -6,7 +6,6 @@ import lombok.Data;
 @Data
 public class ModifyUserRequest {
 
-  private Long id;
   private String name;
   private String email;
   private String password;
