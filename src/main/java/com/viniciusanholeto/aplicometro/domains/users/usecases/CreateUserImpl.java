@@ -1,5 +1,7 @@
 package com.viniciusanholeto.aplicometro.domains.users.usecases;
 
+import com.viniciusanholeto.aplicometro.domains.users.exceptions.UsersExceptions.UserAlreadyExistsException;
+import com.viniciusanholeto.aplicometro.domains.users.exceptions.UsersExceptions.UserSaveException;
 import com.viniciusanholeto.aplicometro.domains.users.inputs.CreateUserInput;
 import com.viniciusanholeto.aplicometro.domains.users.models.UserModel;
 import com.viniciusanholeto.aplicometro.domains.users.ports.UserDatabasePort;
@@ -21,12 +23,14 @@ public class CreateUserImpl implements CreateUser {
 
     database.findUserByEmail(input.getEmail())
         .ifPresent(user -> {
-          throw new IllegalArgumentException("User with this email already exists");
+          throw new UserAlreadyExistsException(input.getEmail());
         });
 
-    UserModel createdUser = database.saveUser(input.toModel()).orElseThrow();
+    UserModel createdUser = database.saveUser(input.toModel())
+        .orElseThrow(() -> new UserSaveException(input.getEmail()));
 
-    database.saveUserCredentials(createdUser.getEmail(), PasswordCodec.encode(input.getPassword()));
+    database.saveUserCredentials(createdUser.getEmail(),
+        PasswordCodec.encode(input.getPassword()));
 
     return createdUser;
   }
