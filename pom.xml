@@ -41,6 +41,8 @@
       **/entities/**,
       **/controllers/**,
       **/swagger/**,
+      **/exceptions/**,
+      **/errors/**,
       **/Aplication.class
     </jacoco.excludes>
   </properties>
