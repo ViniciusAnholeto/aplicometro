@@ -30,9 +30,6 @@ public class CreateUserInput {
         .jobTitle(jobTitle)
         .jobLevel(jobLevel)
         .jobHunting(jobHunting != null && jobHunting)
-        .createdAt(createdAt != null ? createdAt : LocalDateTime.now())
-        .updatedAt(updatedAt != null ? updatedAt : LocalDateTime.now())
-        .lastLogin(lastLogin != null ? lastLogin : LocalDateTime.now())
         .build();
   }
 }

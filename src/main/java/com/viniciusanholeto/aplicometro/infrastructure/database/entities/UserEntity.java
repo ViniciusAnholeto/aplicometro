@@ -49,13 +49,13 @@ public class UserEntity {
   public UserEntity(UserModel userModel) {
     this.email = userModel.getEmail();
     this.name = userModel.getName();
-    this.createdAt = userModel.getCreatedAt();
-    this.updatedAt = userModel.getUpdatedAt();
+    this.createdAt = LocalDateTime.now();
+    this.updatedAt = LocalDateTime.now();
     this.birthdate = Date.valueOf(userModel.getBirthdate());
     this.jobTitle = userModel.getJobTitle();
     this.jobLevel = userModel.getJobLevel();
     this.jobHunting = userModel.isJobHunting();
-    this.lastLogin = userModel.getLastLogin();
+    this.lastLogin = LocalDateTime.now();
     this.accountStatus = userModel.getAccountStatus();
   }
 
