@@ -1,5 +1,7 @@
 package com.viniciusanholeto.aplicometro.domains.users.usecases;
 
+import com.viniciusanholeto.aplicometro.domains.users.exceptions.UsersExceptions.UserNotFoundException;
+import com.viniciusanholeto.aplicometro.domains.users.exceptions.UsersExceptions.UserSaveException;
 import com.viniciusanholeto.aplicometro.domains.users.inputs.ModifyUserInput;
 import com.viniciusanholeto.aplicometro.domains.users.models.UserModel;
 import com.viniciusanholeto.aplicometro.domains.users.ports.UserDatabasePort;
@@ -21,7 +23,7 @@ public class ModifyUserImpl implements ModifyUser {
 
     return database.findUserByEmail(email)
         .map(user -> database.saveUser(userToUpdate)
-            .orElseThrow(() -> new RuntimeException("Failed to save user")))
-        .orElseThrow(() -> new RuntimeException("User not found"));
+            .orElseThrow(() -> new UserSaveException(input.getEmail())))
+        .orElseThrow(() -> new UserNotFoundException(input.getEmail()));
   }
 }
