@@ -1,5 +1,6 @@
 package com.viniciusanholeto.aplicometro.domains.users.usecases;
 
+import com.viniciusanholeto.aplicometro.domains.users.exceptions.UsersExceptions.UserNotFoundException;
 import com.viniciusanholeto.aplicometro.domains.users.models.UserModel;
 import com.viniciusanholeto.aplicometro.domains.users.ports.UserDatabasePort;
 import com.viniciusanholeto.aplicometro.domains.users.resources.FindUser;
@@ -15,6 +16,6 @@ public class FindUserImpl implements FindUser {
   @Override
   public UserModel execute(String email) {
     return database.findUserByEmail(email)
-        .orElseThrow();
+        .orElseThrow(() -> new UserNotFoundException(email));
   }
 }

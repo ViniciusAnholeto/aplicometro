@@ -1,5 +1,6 @@
 package com.viniciusanholeto.aplicometro.domains.users.usecases;
 
+import com.viniciusanholeto.aplicometro.domains.users.exceptions.UsersExceptions.UserNotFoundException;
 import com.viniciusanholeto.aplicometro.domains.users.ports.UserDatabasePort;
 import com.viniciusanholeto.aplicometro.domains.users.resources.DeleteUser;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,11 @@ public class DeleteUserImpl implements DeleteUser {
   @Override
   public void execute(String userEmail) {
     database.findUserByEmail(userEmail)
-            .ifPresent(user -> database.deleteUser(userEmail));
+        .ifPresentOrElse(
+            user -> database.deleteUser(userEmail),
+            () -> {
+              throw new UserNotFoundException(userEmail);
+            });
   }
 
 }

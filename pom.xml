@@ -11,7 +11,7 @@
   </parent>
   <groupId>com.viniciusanholeto</groupId>
   <artifactId>aplicometro</artifactId>
-  <version>0.0.5-SNAPSHOT</version>
+  <version>0.0.6-SNAPSHOT</version>
   <name>Aplicometro</name>
   <description>Job application tracking system</description>
   <url/>
@@ -41,6 +41,8 @@
       **/entities/**,
       **/controllers/**,
       **/swagger/**,
+      **/exceptions/**,
+      **/errors/**,
       **/Aplication.class
     </jacoco.excludes>
   </properties>
