@@ -8,6 +8,7 @@ import com.viniciusanholeto.aplicometro.infrastructure.api.v1.request.users.Crea
 import com.viniciusanholeto.aplicometro.infrastructure.api.v1.request.users.ModifyUserRequest;
 import com.viniciusanholeto.aplicometro.infrastructure.api.v1.response.users.UserResponse;
 import com.viniciusanholeto.aplicometro.infrastructure.api.v1.swagger.UserDoc;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,7 @@ public class UserController implements UserDoc {
 
   @Override
   @PostMapping("/create")
-  public UserResponse createUser(CreateUserRequest request) {
+  public UserResponse createUser(@RequestBody @Valid CreateUserRequest request) {
     log.info("Creating user with request: {}", request);
     return new UserResponse(createUser.execute(request.toInput()));
   }
@@ -46,14 +47,14 @@ public class UserController implements UserDoc {
 
   @Override
   @GetMapping("/{email}")
-  public UserResponse findUserByEmail(String email) {
+  public UserResponse findUserByEmail(@PathVariable String email) {
     log.info("Finding user by email: {}", email);
     return new UserResponse(findUser.execute(email));
   }
 
   @Override
   @GetMapping("/delete/{email}")
-  public void deleteUserByEmail(String email) {
+  public void deleteUserByEmail(@PathVariable String email) {
     log.info("Deleting user by email: {}", email);
     deleteUser.execute(email);
   }
