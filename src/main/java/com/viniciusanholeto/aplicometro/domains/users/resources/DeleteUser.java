@@ -7,5 +7,5 @@ public interface DeleteUser {
    *
    * @param id the ID of the user to delete
    */
-  void execute(Long id);
+  void execute(String id);
 }

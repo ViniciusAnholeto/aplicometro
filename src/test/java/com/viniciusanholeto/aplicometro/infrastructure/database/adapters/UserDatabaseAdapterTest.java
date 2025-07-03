@@ -1,7 +1,7 @@
 package com.viniciusanholeto.aplicometro.infrastructure.database.adapters;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -9,10 +9,11 @@ import static org.mockito.Mockito.when;
 
 import com.viniciusanholeto.aplicometro.domains.users.fixtures.UserModelFixture;
 import com.viniciusanholeto.aplicometro.domains.users.models.UserModel;
+import com.viniciusanholeto.aplicometro.infrastructure.database.entities.UserCredentialsEntity;
 import com.viniciusanholeto.aplicometro.infrastructure.database.entities.UserEntity;
+import com.viniciusanholeto.aplicometro.infrastructure.database.repositories.UserCredentialsRepository;
 import com.viniciusanholeto.aplicometro.infrastructure.database.repositories.UserRepository;
 import java.util.Optional;
-import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -23,41 +24,28 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class UserDatabaseAdapterTest {
 
   @Mock
-  private UserRepository repository;
+  private UserRepository userRepository;
+
+  @Mock
+  private UserCredentialsRepository credentialsRepository;
 
   @InjectMocks
   private UserDatabaseAdapter adapter;
 
   @Test
-  void findUserByIdReturnsEmptyWhenIdIsInvalid() {
-    String userId = UUID.randomUUID().toString();
-    when(repository.findById(UUID.fromString(userId))).thenReturn(Optional.empty());
+  void deleteUserDoesNotThrowExceptionWhenEmailIsValid() {
+    String email = "valid@email.com";
+    doNothing().when(userRepository).deleteByEmail(email);
 
-    Optional<UserModel> result = adapter.findUserById(userId);
+    adapter.deleteUser(email);
 
-    assertTrue(result.isEmpty());
-  }
-
-  @Test
-  void deleteUserDoesNotThrowExceptionWhenIdIsValid() {
-    String userId = UUID.randomUUID().toString();
-    doNothing().when(repository).deleteById(UUID.fromString(userId));
-
-    adapter.deleteUser(userId);
-
-    verify(repository, times(1)).deleteById(UUID.fromString(userId));
-  }
-
-  @Test
-  void deleteUserThrowsExceptionWhenIdIsInvalid() {
-    String userId = "invalid-uuid";
-    assertThrows(IllegalArgumentException.class, () -> adapter.deleteUser(userId));
+    verify(userRepository, times(1)).deleteByEmail(email);
   }
 
   @Test
   void findUserByEmailReturnsEmptyWhenEmailDoesNotExist() {
     String email = "nonexistent@example.com";
-    when(repository.findByEmail(email)).thenReturn(Optional.empty());
+    when(userRepository.findByEmail(email)).thenReturn(Optional.empty());
 
     Optional<UserModel> result = adapter.findUserByEmail(email);
 
@@ -66,17 +54,42 @@ class UserDatabaseAdapterTest {
 
   @Test
   void saveUserReturnsSavedUserModelWhenUserIsValid() {
-    String userId = UUID.randomUUID().toString();
-    UserModel user = createUserModel(userId);
+    UserModel user = createUserModel();
     UserEntity entity = new UserEntity(user);
-    when(repository.save(entity)).thenReturn(entity);
+    when(userRepository.save(any(UserEntity.class))).thenReturn(entity);
 
     Optional<UserModel> result = adapter.saveUser(user);
 
     assertTrue(result.isPresent());
   }
 
-  private UserModel createUserModel(String id) {
-    return UserModelFixture.create(id);
+  @Test
+  void saveUserCredentialsSavesCredentialsWhenEmailExists() {
+    String email = "valid@email.com";
+    String passwordHash = "hashedPassword";
+    UserEntity userEntity = new UserEntity();
+    UserCredentialsEntity credentialsEntity = new UserCredentialsEntity(email, passwordHash);
+    when(userRepository.findByEmail(email)).thenReturn(Optional.of(userEntity));
+    when(credentialsRepository.save(any(UserCredentialsEntity.class))).thenReturn(
+        credentialsEntity);
+
+    adapter.saveUserCredentials(email, passwordHash);
+
+    verify(credentialsRepository, times(1)).save(any(UserCredentialsEntity.class));
+  }
+
+  @Test
+  void saveUserCredentialsDoesNotSaveCredentialsWhenEmailDoesNotExist() {
+    String email = "nonexistent@email.com";
+    String passwordHash = "hashedPassword";
+    when(userRepository.findByEmail(email)).thenReturn(Optional.empty());
+
+    adapter.saveUserCredentials(email, passwordHash);
+
+    verify(credentialsRepository, times(0)).save(any(UserCredentialsEntity.class));
+  }
+
+  private UserModel createUserModel() {
+    return UserModelFixture.create();
   }
 }

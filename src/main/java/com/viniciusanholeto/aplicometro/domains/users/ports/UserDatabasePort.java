@@ -6,13 +6,6 @@ import java.util.Optional;
 public interface UserDatabasePort {
 
   /**
-   * Finds a user by their ID.
-   * @param userId the ID of the user to find
-   * @return an Optional containing the UserModel if found, or empty if not found
-   */
-  Optional<UserModel> findUserById(String userId);
-
-  /**
    * Finds a user by their email.
    * @param email the email of the user to find
    * @return an Optional containing the UserModel if found, or empty if not found
@@ -27,8 +20,15 @@ public interface UserDatabasePort {
   Optional<UserModel> saveUser(UserModel user);
 
   /**
-   * Deletes a user by their ID.
-   * @param userId the ID of the user to delete
+   * Deletes a user by their email.
+   * @param email the email of the user to delete
    */
-  void deleteUser(String userId);
+  void deleteUser(String email);
+
+  /**
+   * Saves user credentials, including email, password hash, and salt.
+   * @param email the user's email
+   * @param passwordHash the hashed password of the user
+   */
+  void saveUserCredentials(String email, String passwordHash);
 }
