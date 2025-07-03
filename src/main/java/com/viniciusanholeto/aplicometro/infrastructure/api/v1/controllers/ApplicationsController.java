@@ -1,5 +1,9 @@
 package com.viniciusanholeto.aplicometro.infrastructure.api.v1.controllers;
 
+import com.viniciusanholeto.aplicometro.domains.applications.resources.CreateApplication;
+import com.viniciusanholeto.aplicometro.domains.applications.resources.DeleteApplication;
+import com.viniciusanholeto.aplicometro.domains.applications.resources.FindApplication;
+import com.viniciusanholeto.aplicometro.domains.applications.resources.ModifyApplication;
 import com.viniciusanholeto.aplicometro.infrastructure.api.v1.request.applications.CreateApplicationRequest;
 import com.viniciusanholeto.aplicometro.infrastructure.api.v1.request.applications.ModifyApplicationRequest;
 import com.viniciusanholeto.aplicometro.infrastructure.api.v1.response.applications.ApplicationResponse;
@@ -15,23 +19,32 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/applications")
 public class ApplicationsController implements ApplicationsDoc {
 
+  private final CreateApplication createApplication;
+  private final ModifyApplication modifyApplication;
+  private final FindApplication findApplication;
+  private final DeleteApplication deleteApplication;
+
   @Override
   public ApplicationResponse createApplication(CreateApplicationRequest request) {
-    // Logic to create an application
+    log.info("Creating application with request: {}", request);
+    return new ApplicationResponse(createApplication.execute(request.toInput()));
   }
 
   @Override
   public ApplicationResponse modifyApplication(String id, ModifyApplicationRequest request) {
-    // Logic to modify an application
+    log.info("Modifying application with ID: {} and request: {}", id, request);
+    return new ApplicationResponse(modifyApplication.execute(id, request.toInput()));
   }
 
   @Override
   public ApplicationResponse findApplicationById(String id) {
-    // Logic to find an application by ID
+    log.info("Finding application with ID: {}", id);
+    return new ApplicationResponse(findApplication.execute(id));
   }
 
   @Override
   public void deleteApplicationById(String id) {
-    // Logic to delete an application by ID
+    log.info("Deleting application with ID: {}", id);
+    deleteApplication.execute(id);
   }
 }
